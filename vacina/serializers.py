@@ -26,12 +26,17 @@ class ProfileSerializer(serializers.ModelSerializer):
         fields = [
             'id',
             'user', 
-            'cpf', 
-            'telefone', 
+            'first_name', 
+            'last_name', 
             'endereco', 
-            'cidade', 
-            'comorbidade',
-            'alergia',
+            'telefone', 
+            'email',
+            'cidade',
+            'Comorbidade', 
+            'alergia', 
+            'cpf',
+            'password',
+            'confirm',
         ]
 
 
