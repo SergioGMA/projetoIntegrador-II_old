@@ -32,11 +32,11 @@ class ProfileSerializer(serializers.ModelSerializer):
             'telefone', 
             'email',
             'cidade',
-            'Comorbidade', 
+            'comorbidade', 
             'alergia', 
             'cpf',
-            'password',
-            'confirm',
+            #'password',
+            #'confirm',
         ]
 
 
