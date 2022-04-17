@@ -27,6 +27,7 @@ class Vacina(models.Model):
         verbose_name='Data Fabricação', default=datetime.now)
     data_validade = models.DateTimeField(
         verbose_name='Data Validade', max_length=100, default=datetime.now)
+        
 
 
 class Profile(models.Model):
@@ -46,7 +47,7 @@ class Profile(models.Model):
     comorbidade = models.CharField(
         verbose_name='Possui Comorbidade?', max_length=10, default="Não")
     alergia = models.CharField(
-        verbose_name='Apresenta algum tipo de alergia?', max_length=100, default="Não")
+        verbose_name='Apresenta algum tipo de alergia?', max_length=10, default="Não")
     cpf = models.CharField(verbose_name='CPF', max_length=14, unique=True)
     
 
