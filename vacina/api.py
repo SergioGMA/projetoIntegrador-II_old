@@ -25,19 +25,19 @@ class VacinaViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
         return queryset
 
 
-    def post(self, request, *args, **kwargs):
-        try:
-            print(request.body)
-            if len(request.body) > 0:
-                data = json.loads(request.body)
-                d = Vacina(user=data['user'], vacina=data['vacina'], fabricante=data['fabricante'], lote=data['lote'], dose=data['dose'], prof=data['prof'], reg_profissional=data['reg_profissional'], unidade=data['unidade'], data_aplicacao=data['data_aplicacao'], data_fabricacao=data['data_fabricacao'], data_validade=data['data_validade'])
-                d.save()
-                return Response({'status': True, 'msg':'ok'})
-            else:
-                return Response({'status': False, 'msg':'data invalid'})
+    #def post(self, request, *args, **kwargs):
+        #try:
+            #print(request.body)
+            #if len(request.body) > 0:
+                #data = json.loads(request.body)
+                #d = Vacina(user=data['user'], vacina=data['vacina'], fabricante=data['fabricante'], lote=data['lote'], dose=data['dose'], prof=data['prof'], reg_profissional=data['reg_profissional'], unidade=data['unidade'], data_aplicacao=data['data_aplicacao'], data_fabricacao=data['data_fabricacao'], data_validade=data['data_validade'])
+                #d.save()
+                #return Response({'status': True, 'msg':'ok'})
+            #else:
+                #return Response({'status': False, 'msg':'data invalid'})
 
-        except Exception as error:
-            return HttpResponse(error)
+        #except Exception as error:
+            #return HttpResponse(error)
 
 
 
@@ -52,16 +52,24 @@ class ProfileViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
         if len(user) == 0 and len(prof) == 0:
             u = User.objects.create( username=request.data['username'], password=request.data['password'], )
             u.profile.cpf = request.data['cpf']
+            u.profile.telefone = request.data['first_name']
+            u.profile.telefone = request.data['last_name']
+            u.profile.telefone = request.data['endereco']
             u.profile.telefone = request.data['telefone']
-            u.profile.telefone = request.data['telefone']
-            u.profile.telefone = request.data['telefone']
-            u.profile.telefone = request.data['telefone']
+            u.profile.telefone = request.data['email']
+            u.profile.telefone = request.data['cidade']
+            u.profile.telefone = request.data['comorbidade']
+            u.profile.telefone = request.data['alergia']
             u.save()
             return Response({"status": "success", "data": request.data}, status=status.HTTP_200_OK)
         else:
             return Response({"status": "error"}, status=status.HTTP_400_BAD_REQUEST)
 
 
-class BannerViewSet(viewsets.ModelViewSet):
-    queryset = Banner.objects.all()
+class BannerViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
+    queryset = Banner.objects.none()
     serializer_class = BannerSerializer
+
+    def get_queryset(self,):
+        queryset = Banner.objects.all()
+        return queryset

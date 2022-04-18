@@ -23,7 +23,7 @@ class VacinaSerializer(serializers.ModelSerializer):
 
 class ProfileSerializer(serializers.ModelSerializer):
     username = serializers.CharField()
-    password = serializers.CharField(min_length=8)
+    password = serializers.CharField(min_length=8, style={'input_type': 'password'})
     #confirm = serializers.CharField(min_length=8)
     
     class Meta:
