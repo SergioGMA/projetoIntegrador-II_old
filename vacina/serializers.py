@@ -1,3 +1,4 @@
+from importlib.util import source_hash
 from rest_framework import serializers
 from .models import Vacina, Profile, Banner
 
@@ -21,17 +22,26 @@ class VacinaSerializer(serializers.ModelSerializer):
 
 
 class ProfileSerializer(serializers.ModelSerializer):
+    username = serializers.CharField()
+    password = serializers.CharField(min_length=8)
+    #confirm = serializers.CharField(min_length=8)
+    
     class Meta:
         model = Profile
         fields = [
             'id',
-            'user', 
-            'cpf', 
-            'telefone', 
+            'username', 
+            'first_name', 
+            'last_name', 
             'endereco', 
-            'cidade', 
-            'comorbidade',
-            'alergia',
+            'telefone', 
+            'email',
+            'cidade',
+            'comorbidade', 
+            'alergia', 
+            'cpf',
+            'password',
+            #'confirm'
         ]
 
 

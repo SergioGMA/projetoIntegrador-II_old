@@ -1,9 +1,11 @@
 from django.http import HttpResponse
+from django.contrib.auth.models import User
 
 from .models import Vacina, Profile, Banner
 from .serializers import VacinaSerializer, BannerSerializer, ProfileSerializer
 
 from rest_framework import viewsets, mixins
+from rest_framework import status
 from rest_framework.authentication import SessionAuthentication, TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -38,9 +40,26 @@ class VacinaViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
             return HttpResponse(error)
 
 
-class ProfileViewSet(viewsets.ModelViewSet):
-    queryset = Profile.objects.all()
+
+class ProfileViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
+    queryset = Profile.objects.none()
     serializer_class = ProfileSerializer
+
+    def post(self, request):
+        user = User.objects.all().filter(username=request.data['username'])
+        prof = Profile.objects.all().filter(cpf=request.data['cpf'])
+
+        if len(user) == 0 and len(prof) == 0:
+            u = User.objects.create( username=request.data['username'], password=request.data['password'], )
+            u.profile.cpf = request.data['cpf']
+            u.profile.telefone = request.data['telefone']
+            u.profile.telefone = request.data['telefone']
+            u.profile.telefone = request.data['telefone']
+            u.profile.telefone = request.data['telefone']
+            u.save()
+            return Response({"status": "success", "data": request.data}, status=status.HTTP_200_OK)
+        else:
+            return Response({"status": "error"}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class BannerViewSet(viewsets.ModelViewSet):

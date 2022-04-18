@@ -27,21 +27,29 @@ class Vacina(models.Model):
         verbose_name='Data Fabricação', default=datetime.now)
     data_validade = models.DateTimeField(
         verbose_name='Data Validade', max_length=100, default=datetime.now)
+        
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    cpf = models.CharField(verbose_name='CPF', max_length=14, unique=True)
-    telefone = models.CharField(
-        verbose_name='Telefone', max_length=11, default="Telefone")
+    user = models.OneToOneField(User, on_delete=models.CASCADE, unique=True)
+    first_name = models.CharField(
+        verbose_name='first_name', max_length=30, default="Nome")
+    last_name = models.CharField(
+        verbose_name='last_name', max_length=30, default="Sobrenome")
     endereco = models.CharField(
         verbose_name='Endereço', max_length=50, default="Endereço")
-    cidade = models.CharField(verbose_name='Cidade',
+    telefone = models.CharField(
+        verbose_name='Telefone', max_length=11, default="Telefone")
+    email = models.CharField(
+        verbose_name='email', max_length=30, default="email")
+    cidade = models.CharField(verbose_name="Cidade",
                               max_length=30, default="Cidade")
     comorbidade = models.CharField(
         verbose_name='Possui Comorbidade?', max_length=10, default="Não")
     alergia = models.CharField(
-        verbose_name='Apresenta algum tipo de alergia?', max_length=100, default="Não")
+        verbose_name='Apresenta algum tipo de alergia?', max_length=10, default="Não")
+    cpf = models.CharField(verbose_name='CPF', max_length=14, unique=True)
+    
 
 
 @receiver(post_save, sender=User)
