@@ -52,14 +52,14 @@ class ProfileViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
         if len(user) == 0 and len(prof) == 0:
             u = User.objects.create( username=request.data['username'], password=request.data['password'], )
             u.profile.cpf = request.data['cpf']
-            u.profile.telefone = request.data['first_name']
-            u.profile.telefone = request.data['last_name']
-            u.profile.telefone = request.data['endereco']
+            u.profile.first_name = request.data['first_name']
+            u.profile.last_name = request.data['last_name']
+            u.profile.endereco = request.data['endereco']
             u.profile.telefone = request.data['telefone']
-            u.profile.telefone = request.data['email']
-            u.profile.telefone = request.data['cidade']
-            u.profile.telefone = request.data['comorbidade']
-            u.profile.telefone = request.data['alergia']
+            u.profile.email = request.data['email']
+            u.profile.cidade = request.data['cidade']
+            u.profile.comorbidade = request.data['comorbidade']
+            u.profile.alergia = request.data['alergia']
             u.save()
             return Response({"status": "success", "data": request.data}, status=status.HTTP_200_OK)
         else:
