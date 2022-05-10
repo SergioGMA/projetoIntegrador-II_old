@@ -1,9 +1,7 @@
 from django.http import HttpResponse
 from django.contrib.auth.models import User
-
 from .models import Vacina, Profile, Banner
 from .serializers import VacinaSerializer, BannerSerializer, ProfileSerializer
-
 from rest_framework import viewsets, mixins
 from rest_framework import status
 from rest_framework.authentication import SessionAuthentication, TokenAuthentication, BasicAuthentication
@@ -12,7 +10,6 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import generics
 from django.http.response import JsonResponse
-
 import json
 
 class VacinaViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):

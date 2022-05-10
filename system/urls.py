@@ -2,7 +2,6 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 from vacina.api import VacinaViewSet, BannerViewSet, ProfileViewSet
-from vacina.views import TemplateView, CadastroView, VacinaView
 
 router = routers.DefaultRouter()
 router.register(r'vacinas', VacinaViewSet, basename='Vacinas')

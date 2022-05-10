@@ -29,7 +29,6 @@ class Vacina(models.Model):
         verbose_name='Data Validade', max_length=100, default=datetime.now)
         
 
-
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, unique=True)
     first_name = models.CharField(
@@ -50,7 +49,6 @@ class Profile(models.Model):
         verbose_name='Apresenta algum tipo de alergia?', max_length=10, default="Não")
     cpf = models.CharField(verbose_name='CPF', max_length=14, unique=True)
     
-
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
