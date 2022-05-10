@@ -12,6 +12,7 @@ from rest_framework import generics
 from django.http.response import JsonResponse
 import json
 
+
 class VacinaViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     authentication_classes = [SessionAuthentication, TokenAuthentication, BasicAuthentication]
     permission_classes = [IsAuthenticated]
@@ -23,8 +24,6 @@ class VacinaViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
         queryset = Vacina.objects.all().filter(user=user)
         if queryset.exists():
             return queryset
-        else:
-            return JsonResponse("/api")
 
 
 class ProfileViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
